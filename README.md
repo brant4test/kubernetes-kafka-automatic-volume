@@ -3,25 +3,6 @@
 
 Example of three Kafka brokers depending on five Zookeeper instances.
 
-To get consistent service DNS names `kafka-N.broker.kafka`(`.svc.cluster.local`), run everything in a [namespace](http://kubernetes.io/docs/admin/namespaces/walkthrough/):
-```
-kubectl create -f 00namespace.yml
-```
-
-## Set up volume claims
-
-You may add [storage class](http://kubernetes.io/docs/user-guide/persistent-volumes/#storageclasses)
-to the kafka StatefulSet declaration to enable automatic volume provisioning.
-
-Alternatively create [PV](http://kubernetes.io/docs/user-guide/persistent-volumes/#persistent-volumes)s and [PVC](http://kubernetes.io/docs/user-guide/persistent-volumes/#persistentvolumeclaims)s manually. For example in Minikube.
-
-```
-./bootstrap/pv.sh
-kubectl create -f ./bootstrap/pvc.yml
-# check that claims are bound
-kubectl get pvc
-```
-
 ## Set up Zookeeper
 
 There is a Zookeeper+StatefulSet [blog post](http://blog.kubernetes.io/2016/12/statefulset-run-scale-stateful-applications-in-kubernetes.html) and [example](https://github.com/kubernetes/contrib/tree/master/statefulsets/zookeeper),
