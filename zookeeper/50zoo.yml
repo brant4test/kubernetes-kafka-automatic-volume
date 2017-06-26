@@ -31,8 +31,13 @@ spec:
             # There's defaults in this folder, such as logging config
             #- name: conf
             #  mountPath: /conf
-      volumes:
-        #- name: conf
-        #  emptyDir: {}
-        - name: datadir
-          emptyDir: {}
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.beta.kubernetes.io/storage-class: gold
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
