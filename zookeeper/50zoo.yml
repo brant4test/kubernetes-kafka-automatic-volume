@@ -28,6 +28,8 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /data
+            - name: datalog
+              mountPath: /datalog
             # There's defaults in this folder, such as logging config
             #- name: conf
             #  mountPath: /conf
@@ -41,3 +43,12 @@ spec:
       resources:
         requests:
           storage: 2Gi
+  - metadata:
+      name: datalog
+      annotations:
+        volume.beta.kubernetes.io/storage-class: gold
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1.5Gi
